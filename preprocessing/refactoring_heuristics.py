@@ -269,7 +269,7 @@ def method_signature_change_ref(added_methods, removed_methods, common_methods):
                 total_distance = mapped_stmts["distance"].sum()
                 common_methods.append((removed_method, added_m))
                 if len(_changes) > 0:
-                    matched_methods = matched_methods.append(
+                    matched_methods = matched_methods._append(
                         {"from": removed_method.name, "to": added_m.name,
                          "ref_type": _changes,
                          "priority": priority, "total_distance": total_distance, "path": added_m.get_path(),

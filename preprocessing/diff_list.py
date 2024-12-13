@@ -8,6 +8,7 @@ from ast import *
 import os
 import time
 import signal
+import logging
 from preprocessing.utils import to_tree
 
 
@@ -88,8 +89,18 @@ def build_diff_lists(changes_path, commit=None, directory=None, skip_time=None):
                         for ref in refs:
                             refactorings.append((ref, name.split(".")[0]))
                             print(">>>", str(ref))
-                    except Exception as e:
-                        print("Failed to process commit.", e)
+                    except AttributeError as e: 
+                         logging.error(f"AttributeError: {e}")
+                         # Check local variables to identify DataFrame objects
+                         for var_name, var_value in locals().items():
+                            if isinstance(var_value, pd.DataFrame): 
+                                logging.debug(f"{var_name} is a DataFrame: {var_value.head()}") 
+                                logging.debug(f"DataFrame columns: {var_value.columns}")
+                                logging.debug(f"DataFrame shape: {var_value.shape}")
+                            raise 
+                        # Re-raise the error to maintain existing behavior
+                        #  except Exception as e:
+                        #     print("Failed to process commit.", e)
                     except TimeoutError as e:
                         print("Commit skipped due to the long processing time")
                     finally:

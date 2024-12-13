@@ -62,7 +62,7 @@ def statements_match(statements1, statements2, matched_statements, i, _type=""):
                 if identical:
                     if reps is not None:
                         reps = reps.to_dict()
-                    matched_statements = matched_statements.append(
+                    matched_statements = matched_statements._append(
                         {"stmt1": str(statement1), 's1Index': statement1.index, "s1Lineno": statement1.ast_node.lineno, "stmt2": str(statement2),
                          's2Index': statement2.index,
                          "type": _type + "leaf",
@@ -90,7 +90,7 @@ def statements_match(statements1, statements2, matched_statements, i, _type=""):
                     if identical:
                         if reps is not None:
                             reps = reps.to_dict()
-                        matched_statements = matched_statements.append(
+                        matched_statements = matched_statements._append(
                             {"stmt1": str(statement1), 's1Index': statement1.index, "s1Lineno": statement1.ast_node.lineno, "stmt2": str(statement2),
                              's2Index': statement2.index,
                              "type": _type + "compo",
@@ -103,7 +103,7 @@ def statements_match(statements1, statements2, matched_statements, i, _type=""):
                              "replacements": reps
                              },
                             ignore_index=True)
-                        matched_statements = matched_statements.append(compo_matched_statements, ignore_index=True)
+                        matched_statements = matched_statements._append(compo_matched_statements, ignore_index=True)
 
     return matched_statements
 
